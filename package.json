@@ -1,0 +1,24 @@
+{
+  "name": "dsptchr-prisma",
+  "version": "1.0.0",
+  "description": "Dispatchr: complete missions, get paid, uplevel and win the world",
+  "main": "index.js",
+  "repository": "git@github-alchematrix.com:alchematrix0/react-apollo-yoga-prisma.git",
+  "author": "alchematrix0 <alchematrix0@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "graphql": "^14.2.1",
+    "graphql-cli": "^3.0.11",
+    "graphql-yoga": "^1.17.4",
+    "nodemon": "^1.18.11",
+    "prisma-binding": "^2.3.10"
+  },
+  "scripts": {
+    "start": "nodemon -e js,graphql -x node src/index.js",
+    "dev": "nodemon -e js,graphql -x node --inspect src/index.js",
+    "test": "jest",
+    "deploy": "prisma deploy"
+  }
+}
