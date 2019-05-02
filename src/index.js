@@ -15,5 +15,5 @@ server.start({
     origin: process.env.FRONTEND_URL // locks down the end point to our front end url
   },
 }, deets => {
-  console.log(`Yoga server is now running on http://localhost:${deets.port}`)
+  console.log(`Yoga server is now running on http://localhost:${deets.port} 🧘`)
 })
