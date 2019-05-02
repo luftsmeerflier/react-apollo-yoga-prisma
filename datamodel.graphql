@@ -11,13 +11,15 @@ type User {
   email: String! @unique
   ethAddress: String
   firstName: String
+  hasCar: Boolean
+  hasBike: Boolean
   lastName: String
   level: Int
   location: Location
   ltcAddress: String
   password: String
   points: String
-  referredBy: String
+  referredBy: User
   skills: [String] @scalarList(strategy:RELATION)
   socialLinks: SocialLinks
   stripeAccount: String
@@ -31,14 +33,17 @@ type Mission {
   asap: Boolean
   createdAt: DateTime @createdAt
   updatedAt: DateTime @updatedAt
+  image: String
   description: String
   due: DateTime
   icon: String
   online: Boolean
-  postedBy: String!
+  postedBy: User! @relation(name: "Poster")
+  activeUser: User @relation(name: "Active")
+  appliedUsers: [User] @relation(name: "Applicants")
   title: String
   type: String
-  value: Int
+  value: Int!
 }
 
 type Payment {
@@ -49,7 +54,8 @@ type Payment {
   from: String!
   type: String
   mission: Mission!
-  payTo: String!
+  payTo: User! @relation(name: "Receiver")
+  payee: User! @relation(name: "Payee")
 }
 
 type Location {
