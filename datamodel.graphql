@@ -1,0 +1,68 @@
+type User {
+  id: ID! @id
+  name: String!
+  avatar: String
+  badges: [String] @scalarList(strategy:RELATION)
+  bike: Boolean
+  bio: String
+  btcAddress: String
+  car: Boolean
+  codeName: String
+  email: String! @unique
+  ethAddress: String
+  firstName: String
+  lastName: String
+  level: Int
+  location: Location
+  ltcAddress: String
+  password: String
+  points: String
+  referredBy: String
+  skills: [String] @scalarList(strategy:RELATION)
+  socialLinks: SocialLinks
+  stripeAccount: String
+  stripeCustomer: String
+  trophies: [String] @scalarList(strategy:RELATION)
+}
+
+type Mission {
+  id: ID! @id
+  active: Boolean
+  asap: Boolean
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  description: String
+  due: DateTime
+  icon: String
+  online: Boolean
+  postedBy: String!
+  title: String
+  type: String
+  value: Int
+}
+
+type Payment {
+  id: ID! @id
+  amount: Int!
+  chargeId: String
+  datePaid: DateTime
+  from: String!
+  type: String
+  mission: Mission!
+  payTo: String!
+}
+
+type Location {
+  id: ID! @id
+  lat: Float!
+  lng: Float!
+}
+
+type SocialLinks {
+  id: ID! @id
+  facebook: String
+  instagram: String
+  snapchat: String
+  twitter: String
+  website: String
+}
