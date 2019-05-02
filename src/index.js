@@ -1,3 +1,5 @@
+// application entry point, require env vars
+// this file starts the yoga Server and configures middleware
 require('dotenv').config('../.env');
 const createServer = require('./createServer');
 const db = require('./db');

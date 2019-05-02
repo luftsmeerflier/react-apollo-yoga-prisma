@@ -1,6 +1,13 @@
 #### Scaffolding for a React - Apollo Client - Yoga - Prisma Web Application
 
-###### Get Started
+#### Concepts
+
+- GraphQl is a query language, a way to interface with any API that enables developers to request only the data they need and group queries that would otherwise hit multiple databases or tables in a single call by aggregating CRUD functionality into a single endpoint.
+- Our GraphQl endpoint is setup, deployed, documented and organized by Prisma: a GraphQl database as a server type service.
+- To interface with our GraphQl endpoint, we use Yoga, which is just a modified Express server bundling Apollo Server to interact with GraphQl endpoints and empowered by the library `prisma-binding` for specifically working with Prisma.
+- Pulling data from the front end is handled by the Apollo Client (interacts with the Yoga server via Queries and Mutations, akin to the "Controller" in MVC) and React will be used as the view language to express the data in visual language.
+
+###### Get Started [setup Prisma back end with a basic Yoga Server]
 
 1. Create an account on prisma.io
 2. install the primsa cli globally `npm i -g prisma`
@@ -22,3 +29,7 @@
   5. PORT=4444
 
 where * means make it up!
+
+###### Add the Apollo client [Front end]
+
+1.
