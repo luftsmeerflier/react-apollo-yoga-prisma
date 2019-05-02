@@ -1,7 +1,12 @@
+type Mission {
+  title: String!
+}
+
 type Mutation {
-  hi: String
+  # name the mutation, Type of the passed in vars and finally :[returns this] 
+  createMission(title: String!): Mission
 }
 
 type Query {
-  hi: String
+  missions: [Mission]!
 }
