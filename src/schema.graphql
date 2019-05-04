@@ -5,7 +5,7 @@
 #   name the mutation or query(define types expected)
 # } and finally :[returns, can be anything, in most cases we return the queried values or the mutated data]
 # # # # #
-# import statement lives in a comment but imports our generated prsima.graphql schema for use in this file, ie using the <Mission> type
+# the next impor_T statement lives in a comment but imports our generated prsima.graphql schema for use in this file, ie using the <Mission> type
 # # #
 # Prisma Imports
 # import * from './generated/prisma.graphql'
