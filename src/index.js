@@ -8,7 +8,7 @@ const server = createServer();
 
 // TODO use Express middleware for cookies (jwt)
 // TODO use express middleware to populate current user
-
+console.log(`Allowing connections from ${process.env.FRONTEND_URL}`)
 server.start({
   cors: {
     credentials: true,
