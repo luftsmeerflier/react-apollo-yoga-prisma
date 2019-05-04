@@ -1,26 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { gql } from 'apollo-boost';
+import { Query } from 'react-apollo';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const GET_MISSIONS = gql`
+  {
+    missions {
+      title
+      id
+    }    
+  }
+`
+
+export default class App extends Component {
+  render () {
+    return (
+      <Query query={GET_MISSIONS}>
+        {({ loading, error, data }) => {
+          if (loading) return <div>Loading...</div>;
+          if (error) {
+            console.error(error)
+            return (<div>Error :( <pre>{error.toString()}</pre></div>)
+          }
+
+          return (
+            <div className="App">
+              <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <p>
+                  Welcome to Dispatchr on GraphQl
+                </p>
+                <ul>
+                  {data.missions.map(m => (
+                    <li>{m.title}</li>
+                  ))}
+                </ul>
+              </header>
+            </div>
+          )
+        }}
+      </Query>
+    );
+  }
 }
-
-export default App;
