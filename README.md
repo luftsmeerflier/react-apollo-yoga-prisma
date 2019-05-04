@@ -37,6 +37,8 @@ where * means make it up!
 3. Query.js and Mutation.js is where we actually write the resolvers that will handle the business logic like checking authentication, charging cards, calling other APIs
 
 
-###### Add the Apollo client [Front end]
+###### Apollo client [Front end]
 
-1.
+1. Created with the help of the Apollo-Boost package instantiated in index.js
+2. IMPORTANT: Ensure your back end URL is correctly passed via another .env file in the `frontend` folder. This .env file must preface custom variables with REACT_APP_<ENV_NAME_HERE>. For example, your file probably should have at minimum a line like: `REACT_APP_YOGA_ENDPOINT_DEV=http://localhost:4444`
+3. Queries are defined at the component leve, see App.js for an example of how to use the `<Query>` component
