@@ -1,10 +1,23 @@
-type Mission {
-  title: String!
-}
+# # # # #
+# public facing API Spec
+# # #
+# Structure: type [Mutation || Query] {
+#   name the mutation or query(define types expected)
+# } and finally :[returns, can be anything, in most cases we return the queried values or the mutated data]
+# # # # #
+# import statement lives in a comment but imports our generated prsima.graphql schema for use in this file, ie using the <Mission> type
+# # #
+# Prisma Imports
+# import * from './generated/prisma.graphql'
+# # # # #
 
 type Mutation {
-  # name the mutation, Type of the passed in vars and finally :[returns this] 
-  createMission(title: String!): Mission
+  createMission(
+    title: String!
+    value: Int
+    description: String
+    online: Boolean
+  ): Mission!
 }
 
 type Query {

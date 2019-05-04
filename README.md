@@ -19,7 +19,7 @@
     1. `generated/prisma.graphql` is our schema pulled down from the server via the post deploy hook in `prisma.yml`. This introspects our database and returns a graphql spec.
     2. `createServer` starts the yoga server that in turn connects to the remote prisma instance via config info in `db.js`
     3. `resolvers/` is where we will write our queries and mutations on the back end for use by the Apollo client
-    4. `schema.graphql` us yet another schema and its purpose is as yet unclear
+    4. `schema.graphql` is our public facing API spec. So in here we define the mutations and queries available to our clients.
 
 8. to start, you will need to an a `.env` to the root directory. This file should have at least:
   1. FRONTEND_URL=localhost:7777
@@ -29,6 +29,13 @@
   5. PORT=4444
 
 where * means make it up!
+
+#### HOW TO :: add a new Type with queries and mutations
+
+1. Write out the Type in `datamodel.graphql` and push the spec back up to Prisma (`yarn deploy`)
+2. In `schema.graphql` we specify the queries and mutations we will use for this Type
+3. Query.js and Mutation.js is where we actually write the resolvers that will handle the business logic like checking authentication, charging cards, calling other APIs
+
 
 ###### Add the Apollo client [Front end]
 
