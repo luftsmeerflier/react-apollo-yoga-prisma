@@ -1,6 +1,13 @@
+enum Permission {
+  ADMIN
+  USER
+  TRIAL
+}
+
 type User {
   id: ID! @id
   name: String!
+  username: String! @unique
   avatar: String
   badges: [String] @scalarList(strategy:RELATION)
   bike: Boolean
@@ -17,9 +24,12 @@ type User {
   level: Int
   location: Location
   ltcAddress: String
-  password: String
+  password: String!
   points: String
   referredBy: User
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission] @scalarList(strategy:RELATION)
   skills: [String] @scalarList(strategy:RELATION)
   socialLinks: SocialLinks
   stripeAccount: String
@@ -55,7 +65,7 @@ type Payment {
   type: String
   mission: Mission!
   payTo: User! @relation(name: "Receiver")
-  payee: User! @relation(name: "Payee")
+  Payee: User! @relation(name: "Payee")
 }
 
 type Location {

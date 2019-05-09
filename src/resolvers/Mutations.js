@@ -21,36 +21,46 @@ const Mutations = {
   },
 
   async signup(parent, args, ctx, info) {
+    console.log(`Signup Mutation.js server side`)
     // lowercase their email
     args.email = args.email.toLowerCase().trim();
+    console.log(args.email)
     // hash their password
     const password = await bcrypt.hash(args.password, 10);
-    // create the user in the database
-    const user = await ctx.db.mutation.createUser(
-      {
-        data: {
-          ...args,
-          password,
-          permissions: { set: ['USER'] },
+    // create the user in the database (createUser function comes from generated/prisma.graphql)
+    try {
+      const user = await ctx.db.mutation.createUser(
+        {
+          data: {
+            ...args,
+            password,
+            username: args.name,
+            permissions: { set: ['USER'] },
+          },
         },
-      },
-      info
-    );
-    // create the JWT token for them
-    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
-    // We set the jwt as a cookie on the response
-    ctx.response.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
-    });
-    // Finalllllly we return the user to the browser
-    return user;
+        info
+      );
+      // create the JWT token for them
+      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+      // We set the jwt as a cookie on the response
+      ctx.response.cookie('token', token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week cookie
+      });
+      // Finalllllly we return the user to the browser
+      return user;
+    } catch (error) {
+      console.error(error)
+      return error
+    }
   },
 
 
   async signin(parent, { email, password }, ctx, info) {
+    console.log(`signin mutation on ${email}`)
     // 1. check if there is a user with that email
     const user = await ctx.db.query.user({ where: { email } });
+    console.dir(user)
     if (!user) {
       throw new Error(`No such user found for email ${email}`);
     }
@@ -60,7 +70,7 @@ const Mutations = {
       throw new Error('Invalid Password!');
     }
     // 3. generate the JWT Token
-    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    const token = jwt.sign({ userid: user.id }, process.env.APP_SECRET);
     // 4. Set the cookie with the token
     ctx.response.cookie('token', token, {
       httpOnly: true,
@@ -72,7 +82,7 @@ const Mutations = {
 
   signout(parent, args, ctx, info) {
     ctx.response.clearCookie('token');
-    return { message: 'Pax Romana!' };
+    return { success: true, message: 'Pax Romana' };
   },
 
 }
