@@ -9,6 +9,7 @@
   "private": false,
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.4",
     "dotenv": "^7.0.0",
     "graphql": "^14.2.1",
     "graphql-cli": "^3.0.11",
@@ -18,8 +19,8 @@
     "prisma-binding": "^2.3.10"
   },
   "scripts": {
-    "start": "nodemon -e js,graphql -x node src/index.js",
-    "dev": "nodemon -e js,graphql -x node --inspect src/index.js",
+    "start": "nodemon -e js,graphql,frontend/* -x node src/index.js",
+    "dev": "nodemon -e js,graphql -x node --inspect src/index.js --ignore ./frontend",
     "playground": "graphql playground",
     "test": "jest",
     "deploy": "prisma deploy"
