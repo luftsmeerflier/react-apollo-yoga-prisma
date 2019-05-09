@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
+import User from '../lib/User'
 
 const GET_MISSIONS = gql`
   {
@@ -16,6 +17,7 @@ export default class Map extends Component {
     return (
       <Query query={GET_MISSIONS}>
         {({ loading, error, data }) => {
+          console.log('missions query on Map.js')
           if (loading) return <div>Loading...</div>;
           if (error) {
             console.error(error)
@@ -25,9 +27,15 @@ export default class Map extends Component {
           return (
             <div className="App">
               <header className="App-header">
+                <User>
+                  {({ data: { me } }) => {
+                    return me ? (<p>Hi {me.name}</p>) : null
+                  }}
+                </User>
                 <p>
                   Welcome to Dispatchr
                 </p>
+
               </header>
               <main>
                 <ul>

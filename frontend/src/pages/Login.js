@@ -54,7 +54,7 @@ class Login extends Component {
                   name="email"
                   placeholder="email"
                   value={this.state.email}
-                  onChange={this.saveToState}
+                  onChange={this.handleChange}
                 />
               </label>
               <label htmlFor="password">
@@ -64,7 +64,7 @@ class Login extends Component {
                   name="password"
                   placeholder="password"
                   value={this.state.password}
-                  onChange={this.saveToState}
+                  onChange={this.handleChange}
                 />
               </label>
 
@@ -73,7 +73,6 @@ class Login extends Component {
           </Form>
         )}
       </Mutation>
-
     )
   }
 }
