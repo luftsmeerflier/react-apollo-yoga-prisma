@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
-import User from '../lib/User'
 import CreateMissionButton from './CreateMissionButton'
 
 const GET_MISSIONS = gql`

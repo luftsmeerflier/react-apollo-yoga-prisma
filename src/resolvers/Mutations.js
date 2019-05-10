@@ -15,6 +15,7 @@ const Mutations = {
     const mission = await ctx.db.mutation.createMission({
       data: {
         ...args,
+        // syntax below creates the relation between the Mission and the User who posted it
         postedBy: {
           connect: { id: args.postedBy },
         },
@@ -25,32 +26,19 @@ const Mutations = {
   },
 
   async signup (parent, args, ctx, info) {
-    console.log(`Signup Mutation.js server side`)
-    // lowercase their email
     args.email = args.email.toLowerCase().trim();
-    console.dir(args)
-    // hash their password
     const password = await bcrypt.hash(args.password, 10);
-    // create the user in the database (createUser function comes from generated/prisma.graphql)
+    // create the user in the database, sign a token, set token to cookies
     try {
-      const user = await ctx.db.mutation.createUser(
-        {
-          data: {
-            ...args,
-            password,
-            permissions: { set: ['USER'] },
-          },
+      const user = await ctx.db.mutation.createUser({
+        data: {
+          ...args,
+          password,
+          permissions: { set: ['USER'] },
         },
-        info
-      );
-      // create the JWT token for them
+      }, info);
       const token = jwt.sign({ userid: user.id }, process.env.APP_SECRET);
-      // We set the jwt as a cookie on the response
-      ctx.response.cookie('token', token, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week cookie
-      });
-      // Finalllllly we return the user to the browser
+      ctx.response.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 * 4});
       return user;
     } catch (error) {
       console.error(error)
@@ -60,26 +48,12 @@ const Mutations = {
 
 
   async signin (parent, { email, password }, ctx, info) {
-    console.log(`signin mutation on ${email}`)
-    // 1. check if there is a user with that email
     const user = await ctx.db.query.user({ where: { email } });
-    console.dir(user)
-    if (!user) {
-      throw new Error(`No such user found for email ${email}`);
-    }
-    // 2. Check if their password is correct
+    if (!user) throw new Error(`No such user found for email ${email}`);
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid) {
-      throw new Error('Invalid Password!');
-    }
-    // 3. generate the JWT Token
+    if (!valid) throw new Error('Invalid Password!');
     const token = jwt.sign({ userid: user.id }, process.env.APP_SECRET);
-    // 4. Set the cookie with the token
-    ctx.response.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365,
-    });
-    // 5. Return the user
+    ctx.response.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 * 4 });
     return user;
   },
 
