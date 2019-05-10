@@ -6,9 +6,9 @@ enum Permission {
 
 type User {
   id: ID! @id
-  name: String!
+  name: String
   username: String! @unique
-  avatar: String
+  avatar: String!
   badges: [String] @scalarList(strategy:RELATION)
   bike: Boolean
   bio: String
@@ -53,7 +53,7 @@ type Mission {
   appliedUsers: [User] @relation(name: "Applicants")
   title: String
   type: String
-  value: Int!
+  bounty: Int!
 }
 
 type Payment {

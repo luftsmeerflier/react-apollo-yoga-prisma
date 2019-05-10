@@ -32,13 +32,13 @@ const CheckLoginRoute = ({ component: Component, ...rest }) => {
   return (
     <User>
       {({loading, error, data}) => {
-        if (loading) {
-          return (<span>loading...</span>)
+        if (loading) { return (<span>loading...</span>) }
+        if (error) { return (<span>Error! {error.toString()}</span>) }
+        if (data) {
+          return data.me ?
+            (<Redirect to={{pathname: '/map', state: { from: 'login' }}} />) :
+          rest.location.pathname === '/signup' ? <SignUp /> : <Login />
         }
-        if (error) {
-          return (<span>Error! {error.toString()}</span>)
-        }
-        if (data) { return data.me ? (<Redirect to={{pathname: '/map', state: { from: 'login' }}} />) : <Login /> }
       }}
     </User>
   )

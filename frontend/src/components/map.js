@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 import User from '../lib/User'
+import CreateMissionButton from './CreateMissionButton'
 
 const GET_MISSIONS = gql`
   {
@@ -27,23 +28,19 @@ export default class Map extends Component {
           return (
             <div className="App">
               <header className="App-header">
-                <User>
-                  {({ data: { me } }) => {
-                    return me ? (<p>Hi {me.name}</p>) : null
-                  }}
-                </User>
+                <p>Hi {this.props.user.username || 'friend'}</p>
                 <p>
                   Welcome to Dispatchr
                 </p>
-
+                <main>
+                  <ul>
+                    {data.missions.map(m => (
+                      <li>{m.title}</li>
+                    ))}
+                  </ul>
+                  <CreateMissionButton user={this.props.user} GET_MISSIONS={GET_MISSIONS}/>
+                </main>
               </header>
-              <main>
-                <ul>
-                  {data.missions.map(m => (
-                    <li>{m.title}</li>
-                  ))}
-                </ul>
-              </main>
             </div>
           )
         }}

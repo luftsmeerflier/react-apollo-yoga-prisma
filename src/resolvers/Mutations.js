@@ -7,24 +7,28 @@ const Mutations = {
   // ctx: context, headers, cookies
   // info: details pertaining to the query coming from front end
 
-  async createMission(parent, args, ctx, info) {
+  async createMission (parent, args, ctx, info) {
+    console.log(`Create Mission server side`)
     // TODO check if user is logged in
     // create a dog
-    console.dir(args)
+    console.log(args)
     const mission = await ctx.db.mutation.createMission({
       data: {
-        ...args
+        ...args,
+        postedBy: {
+          connect: { id: args.postedBy },
+        },
       },
     }, info);
 
     return mission
   },
 
-  async signup(parent, args, ctx, info) {
+  async signup (parent, args, ctx, info) {
     console.log(`Signup Mutation.js server side`)
     // lowercase their email
     args.email = args.email.toLowerCase().trim();
-    console.log(args.email)
+    console.dir(args)
     // hash their password
     const password = await bcrypt.hash(args.password, 10);
     // create the user in the database (createUser function comes from generated/prisma.graphql)
@@ -34,14 +38,13 @@ const Mutations = {
           data: {
             ...args,
             password,
-            username: args.name,
             permissions: { set: ['USER'] },
           },
         },
         info
       );
       // create the JWT token for them
-      const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+      const token = jwt.sign({ userid: user.id }, process.env.APP_SECRET);
       // We set the jwt as a cookie on the response
       ctx.response.cookie('token', token, {
         httpOnly: true,
@@ -51,12 +54,12 @@ const Mutations = {
       return user;
     } catch (error) {
       console.error(error)
-      return error
+      return error;
     }
   },
 
 
-  async signin(parent, { email, password }, ctx, info) {
+  async signin (parent, { email, password }, ctx, info) {
     console.log(`signin mutation on ${email}`)
     // 1. check if there is a user with that email
     const user = await ctx.db.query.user({ where: { email } });
@@ -80,7 +83,7 @@ const Mutations = {
     return user;
   },
 
-  signout(parent, args, ctx, info) {
+  signout (parent, args, ctx, info) {
     ctx.response.clearCookie('token');
     return { success: true, message: 'Pax Romana' };
   },
