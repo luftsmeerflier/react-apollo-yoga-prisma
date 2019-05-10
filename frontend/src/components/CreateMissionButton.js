@@ -23,7 +23,7 @@ class CreateMissionButton extends Component {
       description: '',
       image: 'someimg',
       loading: false,
-      modalOpen: true,
+      modalOpen: false,
       postedBy: props.user.id
     }
   }

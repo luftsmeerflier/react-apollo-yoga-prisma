@@ -1,0 +1,55 @@
+@-webkit-keyframes blackWhite {
+  0% {
+    background: url('../img/loading.gif') no-repeat center fixed;
+    background-size: cover;
+  }
+  100% { background-color: black; }
+}
+@-moz-keyframes blackWhite {
+  0% {
+    background: url('../img/loading.gif') no-repeat center fixed;
+    background-size: cover;
+  }
+  100% { background-color: black; }
+}
+@-ms-keyframes blackWhite {
+  0% {
+    background: url('../img/loading.gif') no-repeat center fixed;
+    background-size: cover;
+  }
+  100% { background-color: black; }
+}
+@-o-keyframes blackWhite {
+  0% {
+    background: url('../img/loading.gif') no-repeat center fixed;
+    background-size: cover;
+  }
+  100% { background-color: black; }
+}
+@keyframes blackWhite {
+  0% {
+    background: url('../img/loading.gif') no-repeat center fixed;
+    background-size: cover;
+  }
+  100% { background-color: black; }
+}
+
+
+#loadingScreen {
+  background-color: black;
+  -webkit-animation-name: blackWhite;
+  -webkit-animation-duration: 23s;
+  -moz-animation-name: blackWhite;
+  -moz-animation-duration: 23s;
+  -o-animation-name: blackWhite;
+  -o-animation-duration: 23s;
+  overflow: hidden;
+  height: 100vh;
+  z-index: 10;
+  width: 100vw!important;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

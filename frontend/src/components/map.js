@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 import CreateMissionButton from './CreateMissionButton'
+import { MapLoader } from './pures/Loaders';
 
 const GET_MISSIONS = gql`
   {
@@ -17,8 +18,7 @@ export default class Map extends Component {
     return (
       <Query query={GET_MISSIONS}>
         {({ loading, error, data }) => {
-          console.log('missions query on Map.js')
-          if (loading) return <div>Loading...</div>;
+          if (loading) return (<MapLoader />);
           if (error) {
             console.error(error)
             return (<div>Error :( <pre>{error.toString()}</pre></div>)
