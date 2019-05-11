@@ -27,7 +27,7 @@ export default class Map extends Component {
           return (
             <div className="App">
               <header className="App-header">
-                <p>Hi {this.props.user.username || 'friend'}</p>
+                {/* <p>Hi {this.props.user.username || 'friend'}</p> */}
                 <p>
                   Welcome to Dispatchr
                 </p>
@@ -37,7 +37,7 @@ export default class Map extends Component {
                       <li>{m.title}</li>
                     ))}
                   </ul>
-                  <CreateMissionButton user={this.props.user} GET_MISSIONS={GET_MISSIONS}/>
+                  {/* <CreateMissionButton user={this.props.user} GET_MISSIONS={GET_MISSIONS}/> */}
                 </main>
               </header>
             </div>

@@ -11,7 +11,8 @@ const SIGNIN_MUTATION = gql`
     signin(email: $email, password: $password) {
       id
       email
-      name
+      username
+      token
     }
   }
 `;
@@ -34,12 +35,14 @@ class Login extends Component {
         variables={this.state}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {(signup, { error, loading }) => (
+        {(signin, { error, loading }) => (
           <Form
             method="post"
             onSubmit={async e => {
               e.preventDefault();
-              await signup();
+              console.log('call signin()')
+              const user = await signin();
+              console.dir(user)
               this.setState({ name: '', email: '', password: '' });
             }}
           >
