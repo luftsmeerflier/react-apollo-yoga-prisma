@@ -37,7 +37,7 @@ export default class Map extends Component {
                       <li>{m.title}</li>
                     ))}
                   </ul>
-                  {/* <CreateMissionButton user={this.props.user} GET_MISSIONS={GET_MISSIONS}/> */}
+                  <CreateMissionButton user={this.props.user} GET_MISSIONS={GET_MISSIONS}/>
                 </main>
               </header>
             </div>

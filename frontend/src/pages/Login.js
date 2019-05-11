@@ -12,7 +12,6 @@ const SIGNIN_MUTATION = gql`
       id
       email
       username
-      token
     }
   }
 `;
@@ -40,9 +39,7 @@ class Login extends Component {
             method="post"
             onSubmit={async e => {
               e.preventDefault();
-              console.log('call signin()')
-              const user = await signin();
-              console.dir(user)
+              await signin();
               this.setState({ name: '', email: '', password: '' });
             }}
           >
