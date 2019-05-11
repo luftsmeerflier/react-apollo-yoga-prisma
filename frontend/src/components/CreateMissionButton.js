@@ -38,7 +38,6 @@ class CreateMissionButton extends Component {
     this.setState({ image: file.secure_url })
   }
   render() {
-    console.log(this.state)
     return (
       <>
         <Mutation

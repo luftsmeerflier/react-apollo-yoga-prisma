@@ -3,7 +3,6 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from '../styles/LoginForm'
 import Error from '../components/pures/Error';
-import { Loader } from '../components/pures/Loaders';
 import { CURRENT_USER_QUERY } from '../lib/User';
 
 const SIGNIN_MUTATION = gql`

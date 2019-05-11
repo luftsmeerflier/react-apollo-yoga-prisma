@@ -27,14 +27,14 @@ export default class Map extends Component {
           return (
             <div className="App">
               <header className="App-header">
-                {/* <p>Hi {this.props.user.username || 'friend'}</p> */}
+                <p>Hi {this.props.user.username || 'friend'}</p>
                 <p>
                   Welcome to Dispatchr
                 </p>
                 <main>
                   <ul>
                     {data.missions.map(m => (
-                      <li>{m.title}</li>
+                      <li key={m.id}>{m.title}</li>
                     ))}
                   </ul>
                   <CreateMissionButton user={this.props.user} GET_MISSIONS={GET_MISSIONS}/>
