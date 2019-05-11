@@ -17,7 +17,7 @@ import './App.css';
 // import Activate from './pages/Activate.js';
 // import Application from './Application';
 
-const PropsRoute = ({ component: Component, ...rest }) => <Component component={Component} props={rest} />
+const PropsRoute = ({ component: Component, ...rest }) => <Component component={Component} {...rest} />
 
 const App = (props) => (
   <Router>
