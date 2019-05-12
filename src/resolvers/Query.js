@@ -4,10 +4,29 @@ const Query = {
   // ctx: context, headers, cookies
   // info: details pertaining to the query
   async missions (parent, args, ctx, info) {
-    // // dummy data, to illustrate that calling Prisma server is not required
-    // return [{title: 'Catch a wild Pikachu'}, {title: 'Scale the Eiffel tower'}]
     const missions = await ctx.db.query.missions();
     return missions;
+  },
+  async activeMissions (parent, args, ctx, info) {
+    console.log(args)
+    const missions = await ctx.db.query.missions({where: { activeUser: {id: ctx.request.userid} }});
+    return missions;
+  },
+  async messages (parent, args, ctx, info) {
+    const messages = await ctx.db.query.messages({where: { to: {id: ctx.request.userid} }});
+    return messages;
+  },
+  async sentMessages (parent, args, ctx, info) {
+    const sent = await ctx.db.query.messages({where: { from: {id: ctx.request.userid} }});
+    return sent;
+  },
+  async payments (parent, args, ctx, info) {
+    const payments = await ctx.db.query.payments({where: { payTo: {id: ctx.request.userid} }});
+    return payments;
+  },
+  async paid (parent, args, ctx, info) {
+    const paid = await ctx.db.query.payments({where: { Payee: {id: ctx.request.userid} }});
+    return paid;
   },
   me (parent, args, ctx, info) {
     console.log(`me query`)

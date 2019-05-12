@@ -20,6 +20,12 @@ type Mutation {
     image: String
     online: Boolean
   ): Mission!
+  sendMessage(
+    from: String!
+    to: String!
+    body: String!
+    mission: String
+  ): Message!
   signup(
     email: String!
     password: String!
@@ -35,10 +41,10 @@ type Mutation {
 
 type Query {
   missions: [Mission]!
+  activeMissions: [Mission]!
+  messages: [Message]!
+  sentMessages: [Message]!
+  payments: [Payment]!
+  paid: [Payment]!
   me: User
-}
-
-type Message {
-  success: Boolean!
-  message: String
 }

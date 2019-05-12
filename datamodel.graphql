@@ -37,6 +37,14 @@ type User {
   trophies: [String] @scalarList(strategy:RELATION)
 }
 
+type Message {
+  id: ID! @id
+  body: String!
+  mission: Mission @relation(name: "Re")
+  to: User! @relation(name: "Recipient")
+  from: User! @relation(name: "Sender")
+}
+
 type Mission {
   id: ID! @id
   active: Boolean

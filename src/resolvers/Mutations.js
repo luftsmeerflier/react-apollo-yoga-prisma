@@ -25,6 +25,27 @@ const Mutations = {
     return mission
   },
 
+  async sendMessage (parent, args, ctx, info) {
+    console.log(`send message server side`)
+    // TODO check if user is logged in
+    // create a dog
+    console.log(args)
+    const message = await ctx.db.mutation.sendMessage({
+      data: {
+        ...args,
+        // syntax below creates the relation between the Mission and the User who posted it
+        from: {
+          connect: { id: args.from },
+        },
+        to: {
+          connect: { id: args.to },
+        },
+      },
+    }, info);
+
+    return message
+  },
+
   async signup (parent, args, ctx, info) {
     args.email = args.email.toLowerCase().trim();
     const password = await bcrypt.hash(args.password, 10);

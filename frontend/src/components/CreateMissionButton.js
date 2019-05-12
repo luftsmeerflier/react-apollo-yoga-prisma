@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from '../styles/LoginForm';
 import Error from './pures/Error';
-import { Dialog, IconButton, TextInputField } from 'evergreen-ui';
+import { Dialog, IconButton } from 'evergreen-ui';
 
 const CREATE_MISSION = gql`
   mutation CREATE_MISSION($title: String!, $description: String!, $bounty: Int!, $image: String, $postedBy: String!) {
@@ -23,7 +23,7 @@ class CreateMissionButton extends Component {
       description: '',
       image: 'someimg',
       loading: false,
-      modalOpen: true,
+      modalOpen: false,
       postedBy: props.user.id
     }
   }
@@ -57,7 +57,7 @@ class CreateMissionButton extends Component {
               />
               <Dialog
                 isShown={this.state.modalOpen}
-                title="Create a mission"
+                title='Create a mission'
                 hasFooter={false}
                 hasHeader={false}
                 style={{margin: 0, padding: 0}}
@@ -86,48 +86,48 @@ class CreateMissionButton extends Component {
                           style={{marginTop: '0.5rem', float: 'right'}}
                         />
                       </h2>
-                      <label htmlFor="title">
+                      <label htmlFor='title'>
                         Title
                         <input
-                          type="text"
-                          name="title"
-                          placeholder="Land on the Moon"
+                          type='text'
+                          name='title'
+                          placeholder='Land on the Moon'
                           value={this.state.title}
                           onChange={this.saveToState}
                         />
                       </label>
-                      <label htmlFor="price">
+                      <label htmlFor='price'>
                         Bounty
                         <input
-                          type="number"
-                          name="bounty"
-                          placeholder="1,000,000"
+                          type='number'
+                          name='bounty'
+                          placeholder='1,000,000'
                           value={this.state.bounty}
                           onChange={this.saveToState}
                         />
                       </label>
-                      <label htmlFor="description">
+                      <label htmlFor='description'>
                         Description
                         <input
-                          type="text"
-                          name="description"
-                          placeholder="By any means necessary"
+                          type='text'
+                          name='description'
+                          placeholder='By any means necessary'
                           value={this.state.description}
                           onChange={this.saveToState}
                         />
                       </label>
-                      <label htmlFor="file">
+                      <label htmlFor='file'>
                         Image
                         <input
-                          type="file"
-                          name="file"
-                          placeholder="Upload an image or pdf file"
+                          type='file'
+                          name='file'
+                          placeholder='Upload an image or pdf file'
                           onChange={this.uploadImage}
                         />
                       </label>
 
 
-                      <button type="submit">Dispatch!</button>
+                      <button type='submit'>Dispatch!</button>
                     </fieldset>
                   </div>
                 </Form>
