@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
-import CreateMissionButton from './CreateMissionButton'
-import { MapLoader } from './pures/Loaders';
+import CreateMissionButton from '../components/CreateMissionButton'
+import { MapLoader } from '../components/pures/Loaders';
 
 const GET_MISSIONS = gql`
   {
