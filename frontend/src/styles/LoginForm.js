@@ -27,7 +27,7 @@ const Form = styled.form`
   input,
   textarea,
   select {
-    width: 100%;
+    width: 95%;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid black;
@@ -36,7 +36,7 @@ const Form = styled.form`
       border-color: ${props => props.theme.red};
     }
   }
-  button,
+  button:not(.close),
   input[type='submit'] {
     width: auto;
     background: red;

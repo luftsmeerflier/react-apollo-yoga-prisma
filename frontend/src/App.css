@@ -24,3 +24,24 @@
 .App-link {
   color: #61dafb;
 }
+
+a.navLnk { text-decoration: none; }
+a.navLnk .navTxt { margin-top: 0.25rem; }
+
+.createMissionButton {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.createMissionForm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  height: calc(100vh - 110px);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

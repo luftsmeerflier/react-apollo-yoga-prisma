@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from '../styles/LoginForm';
 import Error from './pures/Error';
+import { Dialog, IconButton, TextInputField } from 'evergreen-ui';
 
 const CREATE_MISSION = gql`
   mutation CREATE_MISSION($title: String!, $description: String!, $bounty: Int!, $image: String, $postedBy: String!) {
@@ -16,14 +17,13 @@ const CREATE_MISSION = gql`
 class CreateMissionButton extends Component {
   constructor(props) {
     super(props)
-    console.dir(props)
     this.state = {
       title: '',
       bounty: '',
       description: '',
       image: 'someimg',
       loading: false,
-      modalOpen: false,
+      modalOpen: true,
       postedBy: props.user.id
     }
   }
@@ -47,34 +47,51 @@ class CreateMissionButton extends Component {
         >
           {(createMission, { error, loading }) => (
             <>
-              <button onClick={this.toggleCreateMissionModal} style={{position: 'fixed', bottom: '120px', right: '20px', zIndex: 2}}>+</button>
-              {this.state.modalOpen && (
+              <IconButton
+                onClick={this.toggleCreateMissionModal}
+                className='createMissionButton'
+                icon='plus'
+                height={40}
+                appearance='primary'
+                intent='success'
+              />
+              <Dialog
+                isShown={this.state.modalOpen}
+                title="Create a mission"
+                hasFooter={false}
+                hasHeader={false}
+                style={{margin: 0, padding: 0}}
+                topOffset={0}
+                sideOffset={0}
+              >
                 <Form
-                  method="post"
+                  className='createMissionForm'
+                  method='post'
                   onSubmit={async e => {
                     e.preventDefault();
                     await createMission();
                   }}
-                  style={{
-                    height: '100vh',
-                    position: 'fixed',
-                    zIndex: 1,
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    backgroundColor: 'white'
-                  }}
                 >
                   <Error error={this.state.error} />
                   <div>
-                    <fieldset style={{paddingRight: '3em'}} disabled={this.state.loading} aria-busy={this.state.loading}>
-                      <h2>New Mission</h2>
+                    <fieldset disabled={this.state.loading} aria-busy={this.state.loading}>
+                      <h2>
+                        New Mission
+                        <IconButton
+                          icon='cross'
+                          className='close'
+                          onClick={() => this.toggleCreateMissionModal()}
+                          type='button'
+                          intent='success'
+                          style={{marginTop: '0.5rem', float: 'right'}}
+                        />
+                      </h2>
                       <label htmlFor="title">
                         Title
                         <input
                           type="text"
                           name="title"
-                          placeholder="Land on the moon"
+                          placeholder="Land on the Moon"
                           value={this.state.title}
                           onChange={this.saveToState}
                         />
@@ -114,7 +131,7 @@ class CreateMissionButton extends Component {
                     </fieldset>
                   </div>
                 </Form>
-              )}
+              </Dialog>
             </>
           )}
         </Mutation>
