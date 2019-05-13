@@ -9,7 +9,7 @@
   "private": false,
   "dependencies": {
     "dotenv": "^7.0.0",
-    "graphql": "^14.2.1",
+    "graphql": "^14.3.0",
     "graphql-cli": "^3.0.11",
     "graphql-yoga": "^1.17.4",
     "nodemon": "^1.18.11",
