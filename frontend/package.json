@@ -5,15 +5,28 @@
   "license": "MIT",
   "dependencies": {
     "apollo-boost": "^0.3.1",
+<<<<<<< HEAD
     "evergreen-ui": "^4.15.0",
+||||||| merged common ancestors
+=======
+    "apollo-client": "^2.5.1",
+    "graphql": "^14.3.0",
+>>>>>>> master
     "graphql-tag": "^2.10.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
+<<<<<<< HEAD
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "styled-components": "^4.2.0"
+||||||| merged common ancestors
+    "react-scripts": "3.0.0"
+=======
+    "react-scripts": "3.0.0",
+    "typescript": "^3.4.5"
+>>>>>>> master
   },
   "scripts": {
     "start": "PORT=3001 BROWSER=none react-scripts start",
